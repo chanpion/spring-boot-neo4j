@@ -11,3 +11,12 @@ neo4j:
     max-connection-lifetime: 30m
     connectionAcquisitionTimeout: 30s
 
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

@@ -1,7 +1,5 @@
 package com.chanpion.kg.neo4j.controller;
 
-import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.collections4.IteratorUtils;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -34,13 +32,13 @@ public class Neo4jController {
         LOGGER.info("search");
         SessionConfig sessionConfig = SessionConfig.builder().withDefaultAccessMode(AccessMode.READ).build();
         try (Session session = driver.session(sessionConfig)) {
-            return session.run("MATCH (m:个股) RETURN m ORDER BY m.name ASC").stream()
+            return session.run("MATCH (m:个股) RETURN m ORDER BY m.name ASC  LIMIT 100").stream()
                     .map(r -> r.get("m").asNode())
                     .map(n -> {
-                        Map<String,Object> map = n.asMap();
-                        map.put("labels", IterableUtils.toList(n.labels()));
-                    return  map;})
-
+                        Map<String, Object> map = new HashMap<>(n.asMap());
+                        map.put("labels", n.labels());
+                        return map;
+                    })
                     .collect(Collectors.toList());
         }
     }
