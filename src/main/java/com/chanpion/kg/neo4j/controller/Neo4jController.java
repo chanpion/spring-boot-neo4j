@@ -6,6 +6,7 @@ import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,10 @@ public class Neo4jController {
                     })
                     .collect(Collectors.toList());
         }
+    }
+
+    @RequestMapping("/{msg}")
+    public Object hi(@PathVariable String msg) {
+        return msg;
     }
 }

@@ -6,7 +6,17 @@
 
     <groupId>com.chanpion</groupId>
     <artifactId>spring-boot-neo4j</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
+    <modules>
+        <module>neo4j-starter</module>
+    </modules>
+    <!--    <modules>-->
+<!--        <module>neo4j-domain</module>-->
+<!--        <module>neo4j-web</module>-->
+<!--        <module>neo4j-application</module>-->
+<!--        <module>neo4j-infrastructure</module>-->
+<!--    </modules>-->
 
     <properties>
         <neo4j.version>4.2.0</neo4j.version>
